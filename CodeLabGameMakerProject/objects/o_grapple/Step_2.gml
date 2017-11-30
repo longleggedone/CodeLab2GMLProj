@@ -1,6 +1,5 @@
-/// @description Insert description here
-// You can write your code in this editor
-if(direction != oldDir)
+
+if(direction != oldDir) //checks to see if we have changed direction, meaning we have bounced
 {
 	bounced = true;
 }
