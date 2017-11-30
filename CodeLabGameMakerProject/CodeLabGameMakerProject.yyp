@@ -262,7 +262,7 @@
                 "resourceCreationConfigs": [
                     "default"
                 ],
-                "resourcePath": "objects\/o_grapple\/o_grapple.yy",
+                "resourcePath": "objects\/o_oldgrapple\/o_oldgrapple.yy",
                 "resourceType": "GMObject"
             }
         },
@@ -891,6 +891,25 @@
                 ],
                 "resourcePath": "options\/mac\/options_mac.yy",
                 "resourceType": "GMMacOptions"
+            }
+        },
+        {
+            "Key": "f9523b4f-d50e-4a91-bf11-61fabaf928f5",
+            "Value": {
+                "id": "e07274f2-2dfe-4528-90ff-45b95e35d5f5",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/o_grapple\/o_grapple.yy",
+                "resourceType": "GMObject"
             }
         }
     ],

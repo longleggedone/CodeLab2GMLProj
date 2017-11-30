@@ -13,15 +13,15 @@ if (keyboard_check_pressed(vk_space) && !place_free(x,y+1)) //if space is presse
 
 //GRAPPLE LOGIC
 
-//if(mouse_check_button_pressed(mb_left)) //if left mouse is pressed
-//{
-//	gx = mouse_x; //set grapple coords to equal mouse position
-//	gy = mouse_y;
-//	if(place_meeting(gx,gy,o_blockG))  //if the grapple coords are meeting with a designated grapple block
-//	{
-//		grappling = true; //set grappling to be truex
-//	}
-//}
+if(mouse_check_button_pressed(mb_left)) //if left mouse is pressed
+{
+	gx = mouse_x; //set grapple coords to equal mouse position
+	gy = mouse_y;
+	if(place_meeting(gx,gy,o_blockG))  //if the grapple coords are meeting with a designated grapple block
+	{
+		grappling = true; //set grappling to be truex
+	}
+}
 
 if(grappling) //if we're grappling
 {
@@ -39,7 +39,7 @@ if(mouse_check_button(mb_left)) && (!grappleOut)
 {
 	//create instance of bullet on the bullet layer
 	//at our position
-	//instance_create_layer(x, y, "Instances", o_grapple)
+	instance_create_layer(x, y, "Instances", o_grapple)
 	//set cooldown to 10
 	grappleOut = true;
 }

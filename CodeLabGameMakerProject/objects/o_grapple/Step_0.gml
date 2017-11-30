@@ -1,84 +1,19 @@
-if(mouse_check_button_pressed(mb_left))
-{
-	pd = point_direction(x,y,mouse_x, mouse_y); //points bullet in direction of mouse cursor
-	dis = point_distance(x,y,mouse_x, mouse_y);
-	grappleOut = true;
-}
-	
+move_bounce_solid(true);
+
+//show_message(string(speed))
+show_debug_message("bounced" + string(bounced))
 
 
-if(!grappleOut)
-{
-	x = o_player.x;
-	y = o_player.y;
-	vsp = 0;
-	hsp = 0;
-	grav = 0;
-	dir = 0;
-	grounded = 0;
-}
-else
-{
-	//var pd = point_direction(x,y,mouse_x, mouse_y); //points bullet in direction of mouse cursor
-	//var dis = point_distance(x,y,mouse_x, mouse_y);
-	hsp = lengthdir_x(dis / 10, pd);
-	vsp = lengthdir_y(dis / 10, pd);
-}
-
-grounded = (place_meeting(x,y + 1,o_block));
-
-if (!grounded)
-{
-	vsp += grav;
-} 
-else 
-{
-	if (abs(0 - hsp) > 0.5) 
-	{
-		hsp -= hsp /10;	 
-	}
-	else
-	{
-		hsp = 0;
-	}
-}
-
-//horizontal collisions
-if (place_meeting(x + hsp, y, o_block))
-{
-	while (!place_meeting(x + sign(hsp), y, o_block))
-	{
-		x += sign(hsp);
-	}
-	hsp = -hsp / 2;
-}
-
-//horizontal movement
-x += hsp;
-
-//vertical collisions
-if (place_meeting(x, y + vsp, o_block))
-{
-	while (!place_meeting(x, y +sign(vsp), o_block))
-	{
-		y += sign(vsp);
-	}
-	vsp = -vsp / 1.5;
-}
-//vertical movement
-if (grounded) && (abs(0 - vsp) < 1) vsp = 0;
-y += vsp;
-
-
-
-//-------------------------------------
 
 if(bounced = true)
 {
-	//if(speed > 0) speed -= 1
+	if(speed != 0)
+	{
+		speed -= min(abs(speed), 0.01) * sign(speed);
+	}
 	
-	//if(place_free(x,y+1)) gravity = 1; //gravity system, if the space below us is free then apply gravity
-	//else gravity = 0; //else do not
+	if(place_free(x,y+1)) gravity = 1; //gravity system, if the space below us is free then apply gravity
+	else gravity = 0; //else do not
 	
 	if(!returning)
 	{
@@ -107,4 +42,3 @@ if(returning = true)
 //	x = o_player.gx;
 //	y = o_player.gy;
 //}
-

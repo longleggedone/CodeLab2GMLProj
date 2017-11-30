@@ -1,17 +1,11 @@
+/// @description Insert description here
+// You can write your code in this editor
+direction = point_direction(x,y,mouse_x, mouse_y); //points bullet in direction of mouse cursor
+//direction = direction + random_range(-4,4);// adds a small random value to direction
+speed = 16; //will move 16 pixels per frame
+image_angle = direction; //sets sprite to face direction
 
-
-////direction = direction + random_range(-4,4);// adds a small random value to direction
-//speed = 16; //will move 16 pixels per frame
-//image_angle = direction; //sets sprite to face direction
-
-hsp = 0; //horizontal speed
-vsp = 0; //vertical speed
-grav = 0; //gravity
-dir = 0; //direction
-grounded = 0; //touching ground
-clicked = 0;
-
-
-grappleOut = false; //have we been thrown
-bounced = false; //did we not hit something grappleable
-returning = false; //are we returning to the player
+oldDir = direction;
+bounced = false;
+returning = false;
+grappled = false;
