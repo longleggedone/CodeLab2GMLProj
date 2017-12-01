@@ -1,3 +1,5 @@
+x = o_player.x;
+y = o_player.y;
 
 camera = camera_create();
 //creates view matrix, the point in space for our camera, where it is looking, and what it considers to be up
@@ -12,7 +14,7 @@ camera_set_proj_mat(camera,pm);
 view_camera[0] = camera;
 
 //object to follow, x and y coordinates to move to
-follow = obj_player;
+follow = o_player;
 xTo = x;
 yTo = y;
 

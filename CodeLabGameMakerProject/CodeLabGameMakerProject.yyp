@@ -286,25 +286,6 @@
             }
         },
         {
-            "Key": "7b2a6847-3f63-4a66-ad88-2a877da34bf1",
-            "Value": {
-                "id": "4751b31f-cb50-4efd-9898-2c4e5fd8fea8",
-                "modelName": "GMResourceInfo",
-                "mvc": "1.0",
-                "configDeltaFiles": [
-                    
-                ],
-                "configDeltas": [
-                    
-                ],
-                "resourceCreationConfigs": [
-                    "default"
-                ],
-                "resourcePath": "sprites\/spr_darktile\/spr_darktile.yy",
-                "resourceType": "GMSprite"
-            }
-        },
-        {
             "Key": "7b4cfa95-551f-4665-a6f4-3655d359e4dd",
             "Value": {
                 "id": "278d6413-9ed3-4419-b5b4-469dfefcbaa2",
@@ -397,6 +378,25 @@
                 ],
                 "resourcePath": "views\/820af8ad-a8ef-4499-a0c2-0d2c8330ca4a.yy",
                 "resourceType": "GMFolder"
+            }
+        },
+        {
+            "Key": "8f9615ea-6060-4f01-bec7-fd68d74d1eb5",
+            "Value": {
+                "id": "da097129-2bd4-484c-bebe-6386bcdfe74e",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "objects\/o_lava\/o_lava.yy",
+                "resourceType": "GMObject"
             }
         },
         {
@@ -571,25 +571,6 @@
             }
         },
         {
-            "Key": "bff67d46-22ba-46a0-be9d-1349bb0bbc44",
-            "Value": {
-                "id": "e1c919da-f3c3-424f-8ed0-82a89b2db58e",
-                "modelName": "GMResourceInfo",
-                "mvc": "1.0",
-                "configDeltaFiles": [
-                    
-                ],
-                "configDeltas": [
-                    
-                ],
-                "resourceCreationConfigs": [
-                    "default"
-                ],
-                "resourcePath": "tilesets\/til_background\/til_background.yy",
-                "resourceType": "GMTileSet"
-            }
-        },
-        {
             "Key": "c7af4829-802f-4497-8a15-ca9b10b59652",
             "Value": {
                 "id": "bfb9ab14-eed4-4f5e-87f3-83a180804c9f",
@@ -666,25 +647,6 @@
             }
         },
         {
-            "Key": "cf47a064-8391-41e5-9c0e-58c935fefdc0",
-            "Value": {
-                "id": "733d4af0-7362-44a2-8f09-4a3096325b19",
-                "modelName": "GMResourceInfo",
-                "mvc": "1.0",
-                "configDeltaFiles": [
-                    
-                ],
-                "configDeltas": [
-                    
-                ],
-                "resourceCreationConfigs": [
-                    "default"
-                ],
-                "resourcePath": "sprites\/spr_titlescreen\/spr_titlescreen.yy",
-                "resourceType": "GMSprite"
-            }
-        },
-        {
             "Key": "d9e0af90-00bb-4df6-a57d-5c974ab99bfe",
             "Value": {
                 "id": "ff04cec7-ce7f-4d68-a730-5f21dd1fbf4f",
@@ -757,6 +719,25 @@
                     "default"
                 ],
                 "resourcePath": "sprites\/spr_block\/spr_block.yy",
+                "resourceType": "GMSprite"
+            }
+        },
+        {
+            "Key": "e7331b12-9b44-4610-ad84-56b00187a01d",
+            "Value": {
+                "id": "dc5f8f2f-ca12-4e13-be0c-878929e7dae5",
+                "modelName": "GMResourceInfo",
+                "mvc": "1.0",
+                "configDeltaFiles": [
+                    
+                ],
+                "configDeltas": [
+                    
+                ],
+                "resourceCreationConfigs": [
+                    "default"
+                ],
+                "resourcePath": "sprites\/spr_lava\/spr_lava.yy",
                 "resourceType": "GMSprite"
             }
         },
