@@ -1,4 +1,7 @@
-/// @description Insert description here
-// You can write your code in this editor
+if (haveDied == false)
+{
 obj_camera.follow = noone;
-instance_destroy();
+haveDied = true;
+//instance_destroy();
+alarm[0] = 1 * room_speed;
+}

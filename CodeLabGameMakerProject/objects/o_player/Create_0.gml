@@ -1,3 +1,4 @@
+
 //gx = x; //coords for the hook
 //gy = y;
 
@@ -11,3 +12,5 @@ jumpheight = 6.2;
 
 grappling = false; //are we grappling?
 grappleOut = false; //have we fired the grapple?
+
+haveDied = false;
