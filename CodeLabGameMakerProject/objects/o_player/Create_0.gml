@@ -10,6 +10,7 @@ GRAPPLING = 2;
 SWINGING = 3;
 
 state = WALKING; //our state which starts as walking
+show_debug_message("Walking")
 
 //movement
 hsp = 0; //horizontal speed
@@ -34,8 +35,11 @@ distance = 0; //our distance from the anchor point
 
 grav = 0.1;
 //jumpheight = 6.2;
+hookSpeed = 10; //the speed at which the hook moves after being thrown
 
+throwing = false; //are we actively throwing the hook, before it has hit anything
+retracting = false; //are we retracting the hook back to our position after throwing?
 grappling = false; //are we grappling?
 grappleOut = false; //have we fired the grapple?
 
-haveDied = false;
+haveDied = false; //are we dead?!?!?

@@ -9,13 +9,15 @@ switch (state)
    
         if (jump) 
 		{  //if we jump                               
-            state = JUMPING; //change state to jump                      
+            state = JUMPING; //change state to jump   
+			show_debug_message("Jumping")
             vsp = jumpSpeed;
 		}   // set vertical speed to jump speed               
 
         if (!place_meeting(x, y + 1, obj_solid)) 
 		{ //if we are not standing on a wall, switch states to jump
             state = JUMPING;
+			show_debug_message("Jumping")
 		}
    
         break;
@@ -28,39 +30,41 @@ switch (state)
         if (place_meeting(x, y + 1, obj_solid)) 
 		{ //if we are standing on a wall
             state = WALKING;
+				show_debug_message("Walking")
 		} //switch states to walking                         
    
-        if (lMouseClick) 
-		{ //if we click while jumping
-            angle = point_direction(x, y, mouse_x, mouse_y); //set angle to the direction between us and the mouse
-            var dist = point_distance(x, y, mouse_x, mouse_y); //create a temp var and set dist to equal the distance between us and the mouse
-            dist = min(dist, maxDistance); //set dist to equal either itself or our max distance, whichever is lower
-            var loop_count = 0; //create a var to hold our loop count, start it at 0
-            anchorX = x; //set anchor coords to begin at ours
-            anchorY = y;
+        //if (lMouseClick) 
+		//{ //if we click while jumping
+        //    angle = point_direction(x, y, mouse_x, mouse_y); //set angle to the direction between us and the mouse
+        //    var dist = point_distance(x, y, mouse_x, mouse_y); //create a temp var and set dist to equal the distance between us and the mouse
+        //    dist = min(dist, maxDistance); //set dist to equal either itself or our max distance, whichever is lower
+        //    var loop_count = 0; //create a var to hold our loop count, start it at 0
+        //    anchorX = x; //set anchor coords to begin at ours
+        //    anchorY = y;
        
-            while (!collision_point(anchorX, anchorY, obj_solid, false, true)) && (loop_count < dist) 
-			{ //while the anchor is not colliding with a wall and while the loop count is less than dist
-                anchorX += lengthdir_x(1, angle); //move anchor coords by length of 1 along our angle
-                anchorY += lengthdir_y(1, angle);
-                loop_count += 1;
-			} //add to loop count
+        //    while (!collision_point(anchorX, anchorY, obj_solid, false, true)) && (loop_count < dist) 
+		//	{ //while the anchor is not colliding with a wall and while the loop count is less than dist
+        //        anchorX += lengthdir_x(1, angle); //move anchor coords by length of 1 along our angle
+        //        anchorY += lengthdir_y(1, angle);
+        //        loop_count += 1;
+		//	} //add to loop count
 
-            if (collision_point(anchorX, anchorY, obj_solid, false, true)) 
-			{  //if the anchor collides with a wall         
-                angle = point_direction(anchorX, anchorY, x, y); //angle now equals the direction between the anchor and our position
-                distance = point_distance(anchorX, anchorY, x, y); //distance now equals the distance between the anchor and our position
-                state = SWINGING; //switch state to swinging
-                vsp = 0; //set vertical and horizontal speed to 0
-                hsp = 0;
-                angleVelocity = 0;
-			}
-		} //set our angle velocity to 0
+        //    if (collision_point(anchorX, anchorY, obj_solid, false, true)) 
+		//	{  //if the anchor collides with a wall         
+        //        angle = point_direction(anchorX, anchorY, x, y); //angle now equals the direction between the anchor and our position
+        //        distance = point_distance(anchorX, anchorY, x, y); //distance now equals the distance between the anchor and our position
+        //        state = SWINGING; //switch state to swinging
+        //        vsp = 0; //set vertical and horizontal speed to 0
+        //        hsp = 0;
+        //        angleVelocity = 0;
+		//	}
+		//} //set our angle velocity to 0
 
            
         break;
  
     //swing state 
+	
     case SWINGING: //when swinging 
 
         distance += (down - up); //change distance using up/down inputs
@@ -75,6 +79,8 @@ switch (state)
  
         hsp = new_x - x; //horizontal and vertical speed update using new x and y
         vsp = new_y - y;
+		
+			
    
         if (place_meeting(x + 1, y, obj_solid)) || //if we collide with a wall
            (place_meeting(x - 1, y, obj_solid)) ||
@@ -82,89 +88,140 @@ switch (state)
            (place_meeting(x, y - 1, obj_solid)) 
 		   {
             state = JUMPING;
+			show_debug_message("Jumping")
+			retracting = true;
 			} //switch state to jump
        
         if (lMouseClick) 
 		{ //if we click
             state = JUMPING;
+			retracting = true;
+			show_debug_message("Jumping")
 		} //switch state to jump
        
         if (jump) 
 		{ //if we press space 
             vsp = jumpSpeed;//set vertical speed to jump speed
             state = JUMPING;
+			retracting = true;
+			show_debug_message("Jumping")
 		} //switch state to jump
        
         break;
 }
 
-//if (!place_meeting(x, y+1, obj_solid)) { //if we aren't standing on a solid object
-//    vsp += grav; //add gravity
-    
-//    // Control the jump height
-//    if (jumpRelease && vsp < -0.1) { //if we let go of jump input and we are rising
-//        vsp -= vsp/3; //subtract 1/3rd of our vertical speed
-//        hsp = 1*image_xscale; //horizontal speed is equal to our image x scale
-//    }
-//}else{ //if we're standing on a solid
-//    vsp = 0; // vertical speed is 0
-//    if (jump) { //if we press the jump input
-//        vsp = -jumpheight; //jump!
-//    }
-//}
+//for throwing/retracting hook
 
-//Grapple hook
-//if(lMouseClick && !grappleOut){ //if the mouse is clicked and a hook is not out
-//    grappleOut = true; //set grappleOut to true
-//    instance_create_depth(x,y, -10, o_grappleHook); //create a hook at the player position
-//}else if(lMouseRelease && grappleOut == 1){ //if the mouse is released and there is a hook out
-//    grappleOut = false; //the hook is no longer out and we are not grappling
-//    grappling = false;
-//    with(o_grappleHook){instance_destroy()} //destroy the current hook
-   
-//}
+if (lMouseClick && !grappleOut){//if the hook is not already out and we click the mouse
+	throwing = true; //set throwing to true
+		show_debug_message("Threw hook")
+	grappleOut = true; //set grappleOut to true
+	instance_create_depth(x,y, -10, o_grappleHook); //create a hook at the player position
+    angle = point_direction(x, y, mouse_x, mouse_y); //set angle to the direction between us and the mouse
+    dist = point_distance(x, y, mouse_x, mouse_y); //create a temp var and set dist to equal the distance between us and the mouse
+    dist = min(dist, maxDistance); //set dist to equal either itself or our max distance, whichever is lower
+    loop_count = 0; //create a var to hold our loop count, start it at 0
+    anchorX = x; //set anchor coords to begin at ours
+    anchorY = y;
+}
 
-//if(grappling == true){ //if we are grappling
-	
-	
-//	if(point_distance(x,y,o_grappleHook.x,o_grappleHook.y) > 100){ //if we are farther than 100 away from the hook
-//		if(y < o_grappleHook.y){ //if we are above the hook
-//	        vsp += 0.2; //increase our downward speed
-//		}else if(y > o_grappleHook.y){ //if we are below the hook
-//	        vsp -= 0.2; //increase our upward speed
-//		}
-//	}
-	
-//	if(x>o_grappleHook.x){ //if we are to the right of the hook
-//        hspd_dir = -1; //increase our leftward speed direction
-//	}else if(x<o_grappleHook.x){ //if we are to the left of the hook
-//        hspd_dir = 1; //increase our rightward speed direction
-//	}
-   
-//	hsp += hspd_dir*0.25; //add a frlMouseClick of our horizontal direction to our horizontal speed
-   
-//	grav = 0.05; //lessen gravity
-   
-//}else{grav = 0.1}; //otherwise return gravity to normal
 
-////Right/Left Movement
+if(grappleOut == true)
+{
+	if(lMouseRelease)//if we are throwing and release the mouse button
+	{
+		throwing = false; //stop throwing
+		retracting = true; //start retracting
+		loop_count = 0; //reset loop count for retracting
+		if(state == SWINGING)
+		{
+			state = JUMPING;
+		}
+		
+	}
+	
+	if (throwing == true)
+	{ //if we click while jumping
+	    if(!collision_point(anchorX, anchorY, obj_solid, false, true)) && (loop_count < dist) 
+		{ //while the anchor is not colliding with a wall and while the loop count is less than dist
+	        anchorX += lengthdir_x(hookSpeed, angle); //move anchor coords by length of 1 along our angle
+	        anchorY += lengthdir_y(hookSpeed, angle);
+	        loop_count += 1;
+		} //add to loop count
+			
 
-//if (right || left) { //if inputting for moving right or left
-//	if(!grappling){
-//		ropeSpdMod = 1;
-//	}else{
-//		ropeSpdMod = 0.2;
-//	}
-//	    hsp += (right-left)*acceleration ; //increase horizontal speed by the correct ammount
-//	    hspd_dir = right - left; //update the direction of your horizontal movement
-    
-//	    if (hsp > spd) hsp = spd;   //
-//	    if (hsp < -spd) hsp = -spd;
+	    if (collision_point(anchorX, anchorY, obj_solid, false, true)) 
+		{  //if the anchor collides with a wall         
+			show_debug_message("Hook hit!")
+	        angle = point_direction(anchorX, anchorY, x, y); //angle now equals the direction between the anchor and our position
+	        distance = point_distance(anchorX, anchorY, x, y); //distance now equals the distance between the anchor and our position
+	        state = SWINGING; //switch state to swinging
+				show_debug_message("Swinging")
+	        vsp = 0; //set vertical and horizontal speed to 0
+	        hsp = 0;
+	        angleVelocity = 0;//set our angle velocity to 0
+			throwing = false //we are no longer throwing
+		}	
+	} 
+	if(retracting = true)
+	{
+		if(anchorX < x)
+		{
+			anchorX += hookSpeed;
+		} 
+		else if (anchorX > x)
+		{
+			anchorX -= hookSpeed;
+		}
+		
+		if(anchorY < y)
+		{
+			anchorY += hookSpeed;
+		} 
+		else if (anchorY > y)
+		{
+			anchorY -= hookSpeed;
+		}
+		
+		if(point_distance(anchorX,anchorY, x, y) < 20)
+		{
+			retracting = false;
+			grappleOut = false;
+			with(o_grappleHook)
+			{
+				instance_destroy()
+			}
+		}
+		
+		
 	
+		
 	
-//} else {
-//    pFriction(acceleration); //if we've stopped input, apply friction using acceleration
-//} 
+		//if(!collision_point(anchorX, anchorY, o_player, false, true)) && (loop_count < dist) 
+		//{ //while the anchor is not colliding with a wall and while the loop count is less than dist
+		//	angle = point_direction(x, y, anchorX, anchorY ); //set angle to the direction between us and the mouse
+		//	dist = point_distance(x, y, anchorX, anchorY); //create a temp var and set dist to equal the distance between us and the mouse
+			
+	    //    anchorX -= lengthdir_x(hookSpeed, angle); //move anchor coords by length of 1 along our angle
+	    //    anchorY -= lengthdir_y(hookSpeed, angle);
+	    //    loop_count += 1;
+		//} //add to loop count
+		//if (collision_point(anchorX, anchorY, o_player, false, true)) 
+		//{  //if the anchor collides with a wall         
+		//	show_debug_message("Hook retracted!")
+		//	retracting = false //we are fully retracted
+		//	grappleOut = false //the grapple is no longer out
+		//	with(o_grappleHook) 
+		//	{
+		//		instance_destroy() //destroy the grappling hook instance
+		//	}
+		//}	
+	}
+}
+
+
+		
+
 
 if (hsp != 0) { //if we're moving horizontally
     image_xscale = sign(hsp); //flip sprite to face the correct way
