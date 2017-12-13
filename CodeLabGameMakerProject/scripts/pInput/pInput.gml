@@ -1,6 +1,6 @@
 //for jumping
 jump = keyboard_check_pressed(vk_space);
-jump_release = keyboard_check_released(vk_space);
+jumpRelease = keyboard_check_released(vk_space);
 //for left right movement
 left = keyboard_check(ord("A"));
 right = keyboard_check(ord("D"));
